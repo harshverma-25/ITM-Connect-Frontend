@@ -5,13 +5,28 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("token");
+    // ✅ 1. If already logged in → go home directly
+    const existingToken = localStorage.getItem("token");
+    if (existingToken) {
+      navigate("/home", { replace: true });
+      return;
+    }
+
+    // ✅ 2. Get token from URL after Google login
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
 
     if (token) {
       localStorage.setItem("token", token);
-      navigate("/home");
+
+      // ✅ Clean the URL (remove ?token=...)
+      window.history.replaceState({}, document.title, "/login");
+
+      // ✅ Go to home
+      navigate("/home", { replace: true });
     } else {
-      navigate("/");
+      // ✅ If no token and not logged in → back to roll verify
+      navigate("/", { replace: true });
     }
   }, [navigate]);
 
@@ -37,31 +52,13 @@ const Login = () => {
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
                 Logging you in...
               </h2>
-              <p className="text-gray-600">Completing your authentication</p>
+              <p className="text-gray-600">Securing your session</p>
             </div>
 
             <div className="w-full bg-gray-100 rounded-full h-1.5 mt-6 overflow-hidden">
               <div className="bg-blue-600 h-full rounded-full animate-pulse"></div>
             </div>
-
-            <div className="mt-8 pt-6 border-t border-gray-100 w-full">
-              <p className="text-sm text-gray-500 text-center">
-                Redirecting...
-              </p>
-            </div>
           </div>
-        </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Having trouble?{" "}
-            <button
-              onClick={() => navigate("/")}
-              className="text-blue-600 hover:text-blue-700 font-medium"
-            >
-              Go back
-            </button>
-          </p>
         </div>
       </div>
     </div>
