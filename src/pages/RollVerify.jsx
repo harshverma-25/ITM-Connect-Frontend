@@ -89,7 +89,7 @@ const RollVerify = () => {
                     className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 
                              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200
                              text-center font-mono tracking-wider disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="0905IT231055"
+                    placeholder="Enter Your Roll Number"
                     value={rollNumber}
                     onChange={(e) => setRollNumber(e.target.value)}
                     disabled={loading}
@@ -102,17 +102,7 @@ const RollVerify = () => {
                   </div>
                 </div>
 
-                {/* Format Example */}
-                <div className="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <p className="text-xs text-gray-600 mb-1">Format Example:</p>
-                  {formatExample("0905IT231055")}
-                  <div className="flex justify-between text-xs text-gray-500 mt-2 px-1">
-                    <span>College</span>
-                    <span>Branch</span>
-                    <span>Year</span>
-                    <span>Roll</span>
-                  </div>
-                </div>
+              
               </div>
 
               <button
@@ -167,12 +157,12 @@ const RollVerify = () => {
             {/* Footer Links */}
             <div className="mt-6 pt-4 border-t border-gray-200">
               <p className="text-center text-gray-600 text-sm">
-                Already have an account?{" "}
+              
                 <a 
                   href="/login" 
                   className="text-blue-600 hover:text-blue-700 font-medium"
                 >
-                  Login here
+                 
                 </a>
               </p>
             </div>
